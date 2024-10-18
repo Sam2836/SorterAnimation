@@ -267,21 +267,7 @@ public class SortingProcess {
             millisSleep = sleepTime;
         }
 
-        public void partitionPulse(int lowerBound, int upperBound) {
-            int pivot = arr[(upperBound-lowerBound)/2];
-            int i = lowerBound; int j = lowerBound;
-            while(true) {
-                while(arr[i] < pivot) {
-                    i++;
-                }
-                while(arr[j] > pivot) {
-                    j++;
-                }
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
+        
 
 
         // Primary method that is called by the main program to sort the array
@@ -298,46 +284,46 @@ public class SortingProcess {
      * MSD Radix sort Algorithm
      */
 
-    public class MSDRadixSort extends SortingProcess {
-        String[] numStrings; // Holds string version of elements
+    // public class MSDRadixSort extends SortingProcess {
+    //     String[] numStrings; // Holds string version of elements
 
-        // Constructor method
-        public MSDRadixSort(int[] arrayInput, int sleepTime) {
-            arr = arrayInput;
-            len = arr.length;
-            comparisons = 0;
-            writes = 0;
-            millisSleep = sleepTime;
-            numStrings = new String[len];
-            // Convert array to strings when object is created
-            numToString();
-        }
+    //     // Constructor method
+    //     public MSDRadixSort(int[] arrayInput, int sleepTime) {
+    //         arr = arrayInput;
+    //         len = arr.length;
+    //         comparisons = 0;
+    //         writes = 0;
+    //         millisSleep = sleepTime;
+    //         numStrings = new String[len];
+    //         // Convert array to strings when object is created
+    //         numToString();
+    //     }
 
-        // Convert each number to a 4-digit string (i.e. 56 --> "0056")
-        public void numToString() {
-            for (int i = 0; i < len; i++) {
-                if (arr[i] < 10) {
-                    numStrings[i] = "000"+Integer.toString(arr[i]);
-                }
-                else if (arr[i] < 100) {
-                    numStrings[i] = "00"+Integer.toString(arr[i]);
-                }
-                else if (arr[i] < 1000) {
-                    numStrings[i] = "0"+Integer.toString(arr[i]);
-                }
-            }
-        }
+    //     // Convert each number to a 4-digit string (i.e. 56 --> "0056")
+    //     public void numToString() {
+    //         for (int i = 0; i < len; i++) {
+    //             if (arr[i] < 10) {
+    //                 numStrings[i] = "000"+Integer.toString(arr[i]);
+    //             }
+    //             else if (arr[i] < 100) {
+    //                 numStrings[i] = "00"+Integer.toString(arr[i]);
+    //             }
+    //             else if (arr[i] < 1000) {
+    //                 numStrings[i] = "0"+Integer.toString(arr[i]);
+    //             }
+    //         }
+    //     }
 
-        public void stringToNum() {
-            for (int i = 0; i < len; i++) {
-                arr[i] = Integer.parseInt(numStrings[i]);
-            }
-        }
+    //     public void stringToNum() {
+    //         for (int i = 0; i < len; i++) {
+    //             arr[i] = Integer.parseInt(numStrings[i]);
+    //         }
+    //     }
 
-        // Primary method that is called by the main program to sort the array
-        // DOES ONLY ONE ITERATION; it is looped in SortingVisual.java
-        public void sort(int i) {
+    //     // Primary method that is called by the main program to sort the array
+    //     // DOES ONLY ONE ITERATION; it is looped in SortingVisual.java
+    //     public void sort(int i) {
 
-        }
-    }
+    //     }
+    // }
 }
