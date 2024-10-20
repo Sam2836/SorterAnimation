@@ -258,6 +258,12 @@ public class SortingProcess {
 
      public class QuickSort extends SortingProcess {
 
+        // Flag if partition is done being separated
+        private boolean partitionFlag;
+        // Keeps track of pivot points in order of contruction
+        private int[] pivotIndices;
+        private int pivotCount;
+
         // Constructor method
         public QuickSort(int[] arrayInput, int sleepTime) {
             arr = arrayInput;
@@ -265,10 +271,13 @@ public class SortingProcess {
             comparisons = 0;
             writes = 0;
             millisSleep = sleepTime;
+            partitionFlag = true;
+            pivotIndices = new int[(int)(Math.log(len)/Math.log(2))+2];
+            pivotCount = 0;
         }
 
-        
-
+        // Makes new partition
+        private int createParition()
 
         // Primary method that is called by the main program to sort the array
         // DOES ONLY ONE ITERATION; it is looped in SortingVisual.java
@@ -276,6 +285,9 @@ public class SortingProcess {
             // Force the loop to wait to make runtime reasonable
             try {Thread.sleep(millisSleep);} catch (InterruptedException e) {}
 
+            if (partitionFlag) {
+                pivotIndices = 
+            }
         }
     }
 
