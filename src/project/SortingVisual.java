@@ -189,7 +189,6 @@ public class SortingVisual extends TApplet {
                 if (width/1.805 < x && x < width/1.805 + width/5) {
                     // Needs to hook into the dedicated quicksort segment in QuickSort.java
                     new Quicksort();
-                    timeWaiting = 75-(int)Math.ceil((double)arraySize/20);
                     
                     stage1();
                 }

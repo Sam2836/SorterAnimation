@@ -20,7 +20,7 @@ public class SortingProcess {
     public void sort(int i) {
     }
 
-    //Check if array is sorted
+    // Check if array is sorted
     public boolean isSorted() {
         for (int i = 1; i < len; i++) {
             if (arr[i-1] > arr[i]) {

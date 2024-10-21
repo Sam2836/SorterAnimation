@@ -28,9 +28,29 @@ public class Quicksort extends TApplet {
     public int lowerBound;
 
 
+    // Check if array is sorted
+    public boolean isSorted() {
+        for (int i = 1; i < arraySize; i++) {
+            if (array[i-1] > array[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     // Naive sort to deal with the tiny segments
     public void naiveSort(int[] arr, int lb, int rb, Graphics g) {
-        for ()
+        for (int i = lb; i < rb; i++) {
+            for (int j = i; j < rb; j++) {
+                if (arr[i] < arr[j]) {
+                    comparisons++;
+                    
+                    swap(arr, i, j);
+                    refreshScreen(arr, g);
+                }
+            }
+        }
     }
 
 
@@ -57,12 +77,11 @@ public class Quicksort extends TApplet {
     // Updates screen
     public void refreshScreen(int[] arr, Graphics g) {
 
-        // Repaint screen in black
+        // Re-covers screen in black
         g.setColor(Color.black);
         g.fillRect(0, 0, width, height);
-        repaint();
 
-        // Repaints rectangles
+        // Updates rectangles
         g.setColor(Color.white);
         int rectWidth = (rightbound-leftBound)/arraySize; // Width of each rectangle depends on array length
         for (int j = 0; j < arraySize; j+=1) {
@@ -70,46 +89,75 @@ public class Quicksort extends TApplet {
             g.fillRect(leftBound+j*rectWidth, (int)(lowerBound-arr[j]/(double)((double)arraySize/500)), rectWidth, (int)(arr[j]/(double)((double)arraySize/500)));
         }
 
-        // Repaints counter variables
+        // Updates counter variables
         g.drawString("Comparisons: "+comparisons, (int)(width*((double)1/4)), (int)((height+lowerBound)/2));
         g.drawString("Writes to main array: "+writes, (int)(width*((double)1/2)), (int)((height+lowerBound)/2));
+
+        // Single repaint
         repaint();
     }
 
 
-    // Actual algorithm; sorts between lb (inclusive) and rb (exclusive)
-    void quicksort(int[] arr, int lb, int rb, Graphics g) {
+    // Swap algorithm
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        writes+=2;
+    }
 
-        // Random pivot point
-        int pivot = arr[new Random().nextInt(rb-lb)+lb];
-        int i = lb;
-        int j = rb-1;
 
-        while (i != j) {
-            try {Thread.sleep(10);} catch (InterruptedException e) {}
-            comparisons++;
-
-            // Search for swappable values on either side of pivot
-            while (arr[i] < pivot) {
-                comparisons++;
-                i++;
-            }
-            while (pivot < arr[j]) {
-                comparisons++;
-                j--;
-            }
-
-            // Swap values at i and j
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            writes++; writes++;
-            refreshScreen(arr, g);
+    // Picks decent pivot value
+    public int pickPivot(int[] arr, int lb, int rb) {
+        int mid = (lb + rb) / 2;
+        if (arr[mid] < arr[lb]) {
+            swap(arr, lb, mid);
         }
-        
-        // i==j at this point
-        quicksort(arr, 0, j, g);
-        quicksort(arr, j, arr.length, g);
+        if (arr[rb-1] < arr[lb]) {
+            swap(arr, lb, rb-1);
+        }
+        if (arr[mid] < arr[rb-1]) {
+            swap(arr, mid, rb-1);
+        }
+        comparisons+=3;
+        return arr[rb-1];
+    }
+
+
+    // Actual algorithm; sorts between lb (inclusive) and rb (exclusive)
+    public void quicksort(int[] arr, int lb, int rb, Graphics g) {
+
+        if (rb-lb < 2) {
+            naiveSort(arr, lb, rb, g);
+        }
+        else {
+            // Random pivot point
+            int pivot = pickPivot(arr, lb, rb);
+            int i = lb;
+            int j = rb-1;
+
+            while (i != j) {
+                // try {Thread.sleep(1);} catch (InterruptedException e) {}
+                comparisons++;
+
+                // Search for swappable values on either side of pivot
+                while (arr[i] < pivot) {
+                    comparisons++;
+                    i++;
+                }
+                while (pivot < arr[j]) {
+                    comparisons++;
+                    j--;
+                }
+
+                swap(arr, i, j);
+                refreshScreen(arr, g);
+            }
+
+            // i==j at this point
+            quicksort(arr, lb, j, g);
+            quicksort(arr, j, rb, g);
+        }
     }
 
 
