@@ -137,6 +137,10 @@ public class SortingVisual extends TApplet {
         g.drawRoundRect(width/4, (int)(height/2.75), width/5, height/4, width/50, height/30);
 
         // MSD Radix Sort button
+        g.drawString("QuickSort", (int)(width/1.72), (int)(height/1.955));
+        g.drawRoundRect((int)(width/1.805), (int)(height/2.75), width/5, height/4, width/50, height/30);
+
+        // MSD Radix Sort button
         // g.drawString("MSD", (int)(width/1.62), (int)(height/2.1));
         // g.drawString("Radix Sort", (int)(width/1.72), (int)(height/1.855));
         // g.drawRoundRect((int)(width/1.805), (int)(height/2.75), width/5, height/4, width/50, height/30);
@@ -181,16 +185,25 @@ public class SortingVisual extends TApplet {
                     // Trigger stage 1
                     stage1();
                 }
-                // Detect click on MSD Radix Sort button
+                // Detect click on QuickSort button
                 if (width/1.805 < x && x < width/1.805 + width/5) {
-                    // Create MSDRadixSort object and assign it to the global SortingProcess object "sorter"
+                    // Needs to hook into the dedicated quicksort segment in QuickSort.java
+                    new Quicksort();
                     timeWaiting = 75-(int)Math.ceil((double)arraySize/20);
-                    // MSDRadixSort sortR = new SortingProcess().new MSDRadixSort(
-                        // getArray(), timeWaiting);
-                    // sorter = sortR;
-                    // Trigger stage 1
+                    
                     stage1();
                 }
+
+                // // Detect click on MSD Radix Sort button
+                // if (width/1.805 < x && x < width/1.805 + width/5) {
+                //     // Create MSDRadixSort object and assign it to the global SortingProcess object "sorter"
+                //     timeWaiting = 75-(int)Math.ceil((double)arraySize/20);
+                //     // MSDRadixSort sortR = new SortingProcess().new MSDRadixSort(
+                //         // getArray(), timeWaiting);
+                //     // sorter = sortR;
+                //     // Trigger stage 1
+                //     stage1();
+                // }
             }
         }
     }

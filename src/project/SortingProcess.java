@@ -1,4 +1,7 @@
 package project;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * Holds all sorting algorithms used in the project as subclasses of SortingProcess.
@@ -254,42 +257,46 @@ public class SortingProcess {
 
     /*
      * QuickSort algorithm
+     * 
+     * fuck
      */
 
-     public class QuickSort extends SortingProcess {
+    //  public class QuickSort extends SortingProcess {
 
-        // Flag if partition is done being separated
-        private boolean partitionFlag;
-        // Keeps track of pivot points in order of contruction
-        private int[] pivotIndices;
-        private int pivotCount;
+    //     // Flag if partition is done being separated
+    //     private boolean partitionFlag;
+    //     // Keeps track of pivot points in order of construction
+    //     private int currentPivotValue;
+    //     private int[] finalPivotIndices;
+    //     private int[] currentArr;
 
-        // Constructor method
-        public QuickSort(int[] arrayInput, int sleepTime) {
-            arr = arrayInput;
-            len = arr.length;
-            comparisons = 0;
-            writes = 0;
-            millisSleep = sleepTime;
-            partitionFlag = true;
-            pivotIndices = new int[(int)(Math.log(len)/Math.log(2))+2];
-            pivotCount = 0;
-        }
+    //     // Constructor method
+    //     public QuickSort(int[] arrayInput, int sleepTime) {
+    //         arr = arrayInput;
+    //         len = arr.length;
+    //         comparisons = 0;
+    //         writes = 0;
+    //         millisSleep = sleepTime;
+    //         partitionFlag = true;
+    //         finalPivotIndices = new int[(int)(Math.log(len)/Math.log(2))+2];
+    //         currentArr = arr;
+    //     }
 
-        // Makes new partition
-        private int createParition()
+    //     // Primary method that is called by the main program to sort the array
+    //     // DOES ONLY ONE ITERATION; it is looped in SortingVisual.java
+    //     public void sort(int i) {
+    //         // Force the loop to wait to make runtime reasonable
+    //         try {Thread.sleep(millisSleep);} catch (InterruptedException e) {}
 
-        // Primary method that is called by the main program to sort the array
-        // DOES ONLY ONE ITERATION; it is looped in SortingVisual.java
-        public void sort(int i) {
-            // Force the loop to wait to make runtime reasonable
-            try {Thread.sleep(millisSleep);} catch (InterruptedException e) {}
+    //         if (partitionFlag) {
+    //             currentPivotValue = currentArr[new Random().nextInt(currentArr.length)];
+    //             partitionFlag = false;
+    //         }
 
-            if (partitionFlag) {
-                pivotIndices = 
-            }
-        }
-    }
+            
+
+    //     }
+    // }
 
 
     /*
