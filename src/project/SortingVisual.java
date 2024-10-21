@@ -132,11 +132,15 @@ public class SortingVisual extends TApplet {
         g.drawRoundRect((int)(width/1.805), (int)(height/1.5), width/5, height/4, width/50, height/30);
 
         // Cocktail Shaker sort button
-        g.drawString("Cocktail", (int)(width/3.46), (int)(height/2.1));
-        g.drawString("Shaker Sort", (int)(width/3.79), (int)(height/1.85));
+        // g.drawString("Cocktail", (int)(width/3.46), (int)(height/2.1));
+        // g.drawString("Shaker Sort", (int)(width/3.79), (int)(height/1.85));
+        // g.drawRoundRect(width/4, (int)(height/2.75), width/5, height/4, width/50, height/30);
+
+        // Bogosort button
+        g.drawString("BogoSort", (int)(width/3.58), (int)(height/1.955));
         g.drawRoundRect(width/4, (int)(height/2.75), width/5, height/4, width/50, height/30);
 
-        // MSD Radix Sort button
+        // Quicksort button
         g.drawString("QuickSort", (int)(width/1.72), (int)(height/1.955));
         g.drawRoundRect((int)(width/1.805), (int)(height/2.75), width/5, height/4, width/50, height/30);
 
@@ -176,20 +180,25 @@ public class SortingVisual extends TApplet {
             }
             if ((int)(height/2.75) + height/4 > y && y > (int)(height/2.75)) {
                 // Detect click on cocktail shaker sort button
+                // if (width/4 < x && x < width/4 + width/5) {
+                //     // Create CocktailShakerSort object and assign it to the global SortingProcess object "sorter"
+                //     timeWaiting = 75-(int)Math.ceil((double)arraySize/20);
+                //     CocktailShakerSort sortC = new SortingProcess().new CocktailShakerSort(
+                //         getArray(), timeWaiting);
+                //     sorter = sortC;
+                //     // Trigger stage 1
+                //     stage1();
                 if (width/4 < x && x < width/4 + width/5) {
-                    // Create CocktailShakerSort object and assign it to the global SortingProcess object "sorter"
-                    timeWaiting = 75-(int)Math.ceil((double)arraySize/20);
-                    CocktailShakerSort sortC = new SortingProcess().new CocktailShakerSort(
-                        getArray(), timeWaiting);
-                    sorter = sortC;
+                    // Needs to hook into the dedicated bogosort segment in Bogosort.java
+                    new Bogosort();
                     // Trigger stage 1
                     stage1();
                 }
                 // Detect click on QuickSort button
                 if (width/1.805 < x && x < width/1.805 + width/5) {
-                    // Needs to hook into the dedicated quicksort segment in QuickSort.java
+                    // Needs to hook into the dedicated quicksort segment in Quicksort.java
                     new Quicksort();
-                    
+                    // Trigger stage 1
                     stage1();
                 }
 

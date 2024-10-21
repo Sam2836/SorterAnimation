@@ -6,11 +6,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import java.awt.*;
 
-/*
- * :D Quicksort is special and can't be implemented well normally with TApplet.
- */
-
-public class Quicksort extends TApplet {
+public class Bogosort extends TApplet {
 
     public int arraySize; // Size of array to be sorted
     public int delay;
@@ -27,30 +23,16 @@ public class Quicksort extends TApplet {
     public int upperBound;
     public int lowerBound;
 
-
+    
     // Check if array is sorted
     public boolean isSorted() {
         for (int i = 1; i < arraySize; i++) {
             if (array[i-1] > array[i]) {
+                comparisons++;
                 return false;
             }
         }
         return true;
-    }
-
-
-    // Naive sort to deal with the tiny segments
-    public void naiveSort(int[] arr, int lb, int rb, Graphics g) {
-        for (int i = lb; i < rb; i++) {
-            for (int j = i; j < rb; j++) {
-                if (arr[i] < arr[j]) {
-                    comparisons++;
-                    
-                    swap(arr, i, j);
-                    refreshScreen(arr, g);
-                }
-            }
-        }
     }
 
 
@@ -98,65 +80,18 @@ public class Quicksort extends TApplet {
     }
 
 
-    // Swap algorithm
-    public void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-        writes+=2;
-    }
-
-
-    // Picks decent pivot value
-    public int pickPivot(int[] arr, int lb, int rb) {
-        int mid = (lb + rb) / 2;
-        if (arr[mid] < arr[lb]) {
-            swap(arr, lb, mid);
-        }
-        if (arr[rb-1] < arr[lb]) {
-            swap(arr, lb, rb-1);
-        }
-        if (arr[mid] < arr[rb-1]) {
-            swap(arr, mid, rb-1);
-        }
-        comparisons+=3;
-        return arr[rb-1];
-    }
-
-
     // Actual algorithm; sorts between lb (inclusive) and rb (exclusive)
-    public void quicksort(int[] arr, int lb, int rb, Graphics g) {
+    public void bogosort(Graphics g) {
+        try {Thread.sleep(400);} catch (InterruptedException e) {}
+        refreshScreen(array, g);
 
-        if (rb-lb < 2) {
-            naiveSort(arr, lb, rb, g);
+        if (isSorted()) {
+            return;
         }
         else {
-            // Random pivot point
-            int pivot = pickPivot(arr, lb, rb);
-            int i = lb;
-            int j = rb-1;
-
-            while (i != j) {
-                // try {Thread.sleep(1);} catch (InterruptedException e) {}
-                comparisons++;
-
-                // Search for swappable values on either side of pivot
-                while (arr[i] < pivot) {
-                    comparisons++;
-                    i++;
-                }
-                while (pivot < arr[j]) {
-                    comparisons++;
-                    j--;
-                }
-
-                swap(arr, i, j);
-                refreshScreen(arr, g);
-            }
-
-            // i==j at this point
-            quicksort(arr, lb, j, g);
-            quicksort(arr, j, rb, g);
+            array = arrayRandomizer.randomArrayGen(arraySize);
+            writes += arraySize;
+            bogosort(g);
         }
     }
 
@@ -187,7 +122,7 @@ public class Quicksort extends TApplet {
         g.drawString("Writes to main array: "+writes, (int)(width*((double)1/2)), (int)((height+lowerBound)/2));
         repaint();
 
-        quicksort(array, 0, array.length, g);
+        bogosort(g);
         if (isSorted()) {
             g.setColor(Color.green);
             g.setFont(new Font(getName(), Font.PLAIN, 20));
@@ -195,4 +130,6 @@ public class Quicksort extends TApplet {
             repaint();
         }
     }
+
+
 }
