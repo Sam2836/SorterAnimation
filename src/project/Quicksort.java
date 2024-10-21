@@ -190,5 +190,11 @@ public class Quicksort extends TApplet {
         repaint();
 
         quicksort(array, 0, array.length, g);
+        if (isSorted()) {
+            g.setColor(Color.green);
+            g.setFont(new Font(getName(), Font.PLAIN, 20));
+            g.drawString("SORTED", width/2, height/10);
+            repaint();
+        }
     }
 }
