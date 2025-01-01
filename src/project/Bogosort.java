@@ -82,7 +82,7 @@ public class Bogosort extends TApplet {
 
     // Actual algorithm; sorts between lb (inclusive) and rb (exclusive)
     public void bogosort(Graphics g) {
-        try {Thread.sleep(400);} catch (InterruptedException e) {}
+        try {Thread.sleep(200);} catch (InterruptedException e) {}
         refreshScreen(array, g);
 
         if (isSorted()) {
